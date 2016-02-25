@@ -28,3 +28,7 @@ The measures are optional
 <li>Position Edge Label : top, bottom, middle, horizontal</li>
 <li>Display Shadow : switch to enable shadow effects behind edge and nodes</li>
 </ul>
+
+<h3>Sample</h3> 
+QVF based on characters from Victor Hugo's novel , Les Misérables.
+
