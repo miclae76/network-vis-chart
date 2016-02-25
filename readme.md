@@ -1,10 +1,8 @@
 <h2>Qlik Sense extension to visualize networks data</h2>
-
+<hr>
 Based on library vis.js (http://visjs.org)
 <br>Tested with Qlik Sense 2.2.3.
-
-<h3>Setup</h3>
-
+<hr>
 <h3>Dimensions</h3>
 4 dimensions are mandatory :
 <ol>
