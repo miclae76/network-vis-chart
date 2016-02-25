@@ -21,3 +21,10 @@ The measures are optional
 </ol>
 
 <h3>Additional network settings</h3>
+<ul>
+<li>Edge Type : select type of curve between nodes</li>
+<li>Node Shape : dot, square, diamond, triangle ...</li>
+<li>Display Edge Value : switch to display the measures on edge curves</li>
+<li>Position Edge Label : top, bottom, middle, horizontal</li>
+<li>Display Shadow : switch to enable shadow effects behind edge and nodes</li>
+</ul>
