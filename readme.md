@@ -31,4 +31,4 @@ The measures are optional
 
 <h3>Sample</h3> 
 QVF based on characters from Victor Hugo's novel , Les Misérables.
-
+<img src="https://github.com/miclae76/network-vis-chart/blob/master/sample/network_chart_v1.png" alt="NetWork Vis Chart Sample" height="480" width="640">
