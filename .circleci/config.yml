@@ -1,0 +1,56 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/qlik-network-chart
+  docker:
+    - image: circleci/node:stretch
+  environment:
+    GITHUB_ORG: "qlik-oss"
+    GITHUB_REPO: "network-vis-chart"
+    PACKAGE_NAME: "qlik-network-chart"
+
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build and package
+          command: npm run build
+          environment:
+            NODE_ENV: production
+      - persist_to_workspace:
+          root: ~/qlik-network-chart
+          paths:
+            - build
+      - store_artifacts:
+          path: build/qlik-network-chart.zip
+          destination: qlik-network-chart.zip
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/qlik-network-chart
+      - run:
+          name: Install ghr
+          command: scripts/install-ghr.sh
+      - run:
+          name: Create GitHub Release
+          command: scripts/create-release.sh $GITHUB_ORG $GITHUB_REPO $PACKAGE_NAME
+
+workflows:
+  version: 2
+  master_flow:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
