@@ -1,0 +1,9 @@
+{
+  "name": "qlik-network-chart",
+  "version": "0.0.1",
+  "description": "Network chart",
+  "keywords": "network chart qliksense extension",
+  "repository": "https://github.com/qlik-oss/network-vis-chart",
+  "author": "Michael Laenen (miclae76) <m.laenen@contactoffice.net>",
+  "license": "MIT"
+}
