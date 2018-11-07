@@ -1,3 +1,7 @@
+# Qlik Network Chart
+
+[![CircleCI](https://circleci.com/gh/qlik-oss/network-vis-chart.svg?style=svg)](https://circleci.com/gh/qlik-oss/network-vis-chart)
+
 <h2>Qlik Sense extension to visualize networks data</h2>
 <hr>
 Based on library vis.js (http://visjs.org)
@@ -9,11 +13,11 @@ Based on library vis.js (http://visjs.org)
   <li>node identifier</li>
   <li>node label</li>
   <li>node parent identifier</li>
-  <li>node group</li> 
+  <li>node group</li>
 </ol>
 
 <h3>Measures</h3>
-The measures are optional 
+The measures are optional
 <ol>
   <li>tooltip : expression that will be push in the tooltip when hover on a node</li>
   <li>node value : used to scale the node size</li>
@@ -29,6 +33,12 @@ The measures are optional
 <li>Display Shadow : switch to enable shadow effects behind edge and nodes</li>
 </ul>
 
-<h3>Sample</h3> 
+<h3>Sample</h3>
 QVF based on characters from Victor Hugo's novel , Les Misérables.
-<img src="https://github.com/miclae76/network-vis-chart/blob/master/sample/network_chart_v1.png" alt="NetWork Vis Chart Sample" height="480" width="640">
+![Network chart](resources/network_chart_v1.png)
+
+# Original Author
+
+**Michael Laenen**
+
+* [github.com/miclae76](https://github.com/miclae76)
