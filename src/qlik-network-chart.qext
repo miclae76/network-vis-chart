@@ -1,6 +1,6 @@
 {
 	"name" : "Network Chart",
-	"description" : "Extension implementing Vis.js NetWork Chart",
+	"description" : "NetWork Chart",
 	"icon" : "extension",
 	"type" : "visualization",
 	"version": "1.0",

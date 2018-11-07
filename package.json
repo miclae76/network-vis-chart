@@ -5,5 +5,34 @@
   "keywords": "network chart qliksense extension",
   "repository": "https://github.com/qlik-oss/network-vis-chart",
   "author": "Michael Laenen (miclae76) <m.laenen@contactoffice.net>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "gulp build",
+    "eslint": "eslint src",
+    "eslint:fix": "eslint --fix src",
+    "watch": "gulp watch"
+  },
+  "devDependencies": {
+    "@babel/core": "7.1.5",
+    "@babel/polyfill": "7.0.0",
+    "@babel/preset-env": "7.1.5",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "8.0.4",
+    "copy-webpack-plugin": "4.6.0",
+    "css-loader": "1.0.1",
+    "del": "3.0.0",
+    "eslint": "5.8.0",
+    "eslint-loader": "2.1.1",
+    "file-loader": "2.0.0",
+    "gulp": "4.0.0",
+    "gulp-zip": "4.2.0",
+    "less": "3.8.1",
+    "less-loader": "4.1.0",
+    "style-loader": "0.23.1",
+    "stylelint": "9.7.1",
+    "stylelint-webpack-plugin": "0.10.5",
+    "webpack": "4.25.1",
+    "webpack-cli": "3.1.2",
+    "webpack-dev-server": "3.1.10"
+  }
 }
