@@ -10,6 +10,8 @@
     "build": "gulp build",
     "eslint": "eslint src",
     "eslint:fix": "eslint --fix src",
+    "test": "karma start karma.conf.js",
+    "test-once": "karma start karma.conf.js --single-run",
     "watch": "gulp watch"
   },
   "devDependencies": {
@@ -26,6 +28,12 @@
     "file-loader": "2.0.0",
     "gulp": "4.0.0",
     "gulp-zip": "4.2.0",
+    "jasmine-core": "3.3.0",
+    "karma": "3.1.1",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-jasmine": "1.1.2",
+    "karma-sourcemap-loader": "0.3.7",
+    "karma-webpack": "3.0.5",
     "less": "3.8.1",
     "less-loader": "4.1.0",
     "style-loader": "0.23.1",
