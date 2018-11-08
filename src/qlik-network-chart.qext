@@ -1,0 +1,16 @@
+{
+	"name" : "Network chart",
+	"description" : "Network chart",
+	"icon" : "extension",
+	"type" : "visualization",
+	"version": "X.Y.Z",
+	"preview" : "network.png",
+	"keywords": "qlik-sense, visualization",
+	"author": "Michael Laenen <michael.laenen@agilos.com>",
+	"homepage": "",
+	"license": "MIT",
+	"repository": "",
+	"dependencies": {
+      "qlik-sense": ">=5.5.x"
+  }
+}

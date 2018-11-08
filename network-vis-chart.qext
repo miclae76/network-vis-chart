@@ -1,9 +1,0 @@
-{
-	"name" : "Network Chart",
-	"description" : "Extension implementing Vis.js NetWork Chart",
-	"icon" : "extension",
-	"type" : "visualization",
-	"version": "1.0",
-	"preview" : "network.png",
-	"author": "Michael Laenen , agilos.com"
-}
