@@ -92,4 +92,3 @@ workflows:
             branches:
               only:
                 - master
-                - project-configuration
