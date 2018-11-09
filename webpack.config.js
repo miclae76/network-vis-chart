@@ -1,6 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const settings = require('./settings');
+const webpack = require('webpack');
 
 console.log('Webpack mode:', settings.mode); // eslint-disable-line no-console
 
@@ -24,6 +25,16 @@ const config = {
         loader: "eslint-loader",
         options: {
           failOnError: true
+        }
+      },
+      {
+        test: /node_modules[\\\/]vis[\\\/].*\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            presets: ['@babel/preset-env']
+          }
         }
       },
       {
@@ -55,7 +66,8 @@ const config = {
     new CopyWebpackPlugin([
       'src/' + settings.name + '.qext'
     ], {}),
-    new StyleLintPlugin()
+    new StyleLintPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/en$/),
   ]
 };
 
