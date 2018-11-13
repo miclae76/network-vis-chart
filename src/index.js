@@ -136,11 +136,12 @@ const component = {
       }
     }
   },
-
+  support: {
+    export: true
+  },
   snapshot: {
     canTakeSnapshot: true
   },
-
   paint: paint
 };
 
