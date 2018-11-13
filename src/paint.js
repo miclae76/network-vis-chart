@@ -1,5 +1,7 @@
 import { Network } from 'vis/index-network';
 import qlik from 'qlik';
+import { createTooltipHTML } from './tooltip';
+import { escapeHTML } from './utilities';
 
 const colorScheme = 'Diverging Classes';
 
@@ -31,20 +33,30 @@ function paint ( $element, layout, qTheme, component ) {
       }));
 
     var dataSet = qData.qMatrix.map(function(e){
-      var dataItem = {
+      const nodeName = e[1].qText;
+      const groupNumber = e[3].qText;
+
+      const dataItem = {
         id: e[0].qNum,
-        label: e[1].qText,
-        group: e[3].qText,
+        label: nodeName,
+        group: groupNumber,
         parentid : e[2].qNum
       };
 
       // optional measures set
       if (e.length > 4) {
-        // tooltip
-        if (isTextCellNotEmpty(e[4])) {
-          dataItem.title = e[4].qText;
+        const tooltip = e[4];
+
+        if (isTextCellNotEmpty(tooltip)) {
+          const tooltipText = tooltip.qText;
+          dataItem.title = escapeHTML(tooltipText);
         } else {
-          dataItem.title = "*** Default Tooltip ***" + "<BR/>" + "Name:" + e[1].qText + "<BR/>" + "Group:" + e[3].qText;
+          const nodeMeasure = e[5].qText;
+          dataItem.title = createTooltipHTML({
+            name: nodeName,
+            groupNumber,
+            nodeMeasure
+          });
         }
       }
 
