@@ -153,6 +153,7 @@ function paint ( $element, layout, qTheme, component ) {
       }
     };
     var network = new Network(container, data, options);
+    network.fit();
 
     // Handle Selection on 1-node
     $("#"+containerId).css('cursor','default');
