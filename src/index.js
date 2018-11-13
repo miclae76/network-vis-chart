@@ -7,7 +7,6 @@ Use at your own risk.
 */
 import "@babel/polyfill";
 import paint from './paint';
-import './styles/vis.min.css';
 
 const component = {
   initialProperties: {
@@ -74,8 +73,8 @@ const component = {
               { value: 'straightCross' },
               { value: 'horizontal' },
               { value: 'vertical' },
-              { value: 'curveCW' },
-              { value: 'curveCCW' },
+              { value: 'curvedCW' },
+              { value: 'curvedCCW' },
               { value: 'cubicBezier' }
             ],
             defaultValue: "dynamic"

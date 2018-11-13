@@ -1,4 +1,4 @@
-import vis from './scripts/vis.min';
+import { Network } from 'vis/index-network';
 
 function isTextCellNotEmpty(c) {
   return (c.qText && !(c.qIsNull || c.qText.trim() == ''));
@@ -92,6 +92,9 @@ function paint ( $element, layout ) {
     var container = document.getElementById(containerId);
 
     var options = {
+      layout: {
+        randomSeed: 1
+      },
       nodes: {
         shape:layout.nodeShape,
         shadow:layout.shadowMode
@@ -122,7 +125,7 @@ function paint ( $element, layout ) {
         stabilization: { iterations: 150 }
       }
     };
-    var network = new vis.Network(container, data, options);
+    var network = new Network(container, data, options);
 
     // Handle Selection on 1-node
     $("#"+containerId).css('cursor','default');
