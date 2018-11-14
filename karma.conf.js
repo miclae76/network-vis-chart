@@ -19,6 +19,14 @@ module.exports = (config) => {
     webpack: {
       devtool: 'source-map',
       mode: settings.mode,
+      externals: {
+        qlik: {
+          amd: 'qlik',
+          commonjs: 'qlik',
+          commonjs2: 'qlik',
+          root: '_'
+        }
+      },
       module: {
         rules: [
           {
