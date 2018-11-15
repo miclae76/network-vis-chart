@@ -25,7 +25,7 @@ function paint ( $element, layout, qTheme, component ) {
   if(qData && qData.qMatrix) {
     $element.empty().append($('<div />')
       .attr({ id: containerId })
-      .toggleClass('is-edit-mode', _this.inEditState())
+      .toggleClass('is-edit-mode', component.inEditState())
       .css({
         height: $element.height(),
         width: $element.width(),
@@ -85,9 +85,18 @@ function paint ( $element, layout, qTheme, component ) {
 
     for(let i = 0; i< dataSet.length; i++){
       if (layout.displayEdgeLabel) {
-        edges.push( { "from":dataSet[i].id, "to":dataSet[i].parentid, "value":dataSet[i].edgeValue, "label":dataSet[i].edgeValue } ); // with labels
+        edges.push({
+          "from":dataSet[i].id,
+          "to":dataSet[i].parentid,
+          "value":dataSet[i].edgeValue,
+          "label": `${dataSet[i].edgeValue}`
+        }); // with labels
       } else {
-        edges.push( { "from":dataSet[i].id, "to":dataSet[i].parentid, "value":dataSet[i].edgeValue } ); // create edges
+        edges.push({
+          "from":dataSet[i].id,
+          "to":dataSet[i].parentid,
+          "value":dataSet[i].edgeValue
+        }); // create edges
       }
 
       // process uniqueness
