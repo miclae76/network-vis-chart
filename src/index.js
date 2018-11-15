@@ -7,6 +7,7 @@ Use at your own risk.
 */
 import "@babel/polyfill";
 import paint from './paint';
+import './styles/main.less';
 
 const component = {
   initialProperties: {
