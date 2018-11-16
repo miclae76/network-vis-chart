@@ -48,17 +48,25 @@ const component = {
     items: {
       data: {
         uses: "data",
-        sorting: {
-          uses: "sorting"
-        },
-        addons: {
-          uses: "addons",
-          items: {
-            dataHandling: {
-              uses: "dataHandling"
-            }
+        items:{
+          dimensions:{
+            disabledRef: ""
+          },
+          measures: {
+            disabledRef: ""
           }
-        },
+        }
+      },
+      sorting: {
+        uses: "sorting"
+      },
+      addons: {
+        uses: "addons",
+        items: {
+          dataHandling: {
+            uses: "dataHandling"
+          }
+        }
       },
       settings: {
         type: "items",
