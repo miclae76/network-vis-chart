@@ -20,10 +20,10 @@ function paint ( $element, layout, qTheme, component ) {
     id = layout.qInfo.qId,
     containerId = 'network-container_' + id;
 
-
   if(qData && qData.qMatrix) {
     $element.empty().append($('<div />')
       .attr({ id: containerId })
+      .toggleClass('is-edit-mode', _this.inEditState())
       .css({
         height: $element.height(),
         width: $element.width(),
