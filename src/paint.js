@@ -1,12 +1,22 @@
 import { Network } from 'vis/index-network';
+import qlik from 'qlik';
+
+const colorScheme = 'Diverging Classes';
 
 function isTextCellNotEmpty(c) {
   return (c.qText && !(c.qIsNull || c.qText.trim() == ''));
 }
 
-function paint ( $element, layout ) {
-  var _this = this,
-    qData = layout.qHyperCube.qDataPages[0],
+function paint ( $element, layout, qTheme, component ) {
+  const colorScale = qTheme.properties.scales
+    .find(scale => scale.name === colorScheme).scale;
+  const colors = colorScale[colorScale.length - 1];
+
+  function getColor (number) {
+    return colors[number % colors.length];
+  }
+
+  var qData = layout.qHyperCube.qDataPages[0],
     id = layout.qInfo.qId,
     containerId = 'network-container_' + id;
 
@@ -59,6 +69,7 @@ function paint ( $element, layout ) {
     var uniqueId = [];
     var nodes = [];
     var edges = [];
+    const groups = {};
 
     for(let i = 0; i< dataSet.length; i++){
       if (layout.displayEdgeLabel) {
@@ -72,13 +83,16 @@ function paint ( $element, layout ) {
         uniqueId.push(dataSet[i].id);
 
         var nodeItem = {
-          "id": dataSet[i].id,
-          "label": dataSet[i].label,
-          "title": dataSet[i].title,
-          "group": dataSet[i].group,
-          "value": dataSet[i].nodeValue
+          id: dataSet[i].id,
+          label: dataSet[i].label,
+          title: dataSet[i].title,
+          group: dataSet[i].group,
+          value: dataSet[i].nodeValue
         };
         nodes.push(nodeItem); // create node
+        groups[nodeItem.group] = {
+          color: getColor(nodeItem.group)
+        };
       }
     }
 
@@ -92,6 +106,7 @@ function paint ( $element, layout ) {
     var container = document.getElementById(containerId);
 
     var options = {
+      groups: groups,
       layout: {
         randomSeed: 1
       },
@@ -139,11 +154,24 @@ function paint ( $element, layout ) {
           connectedNodes.push(properties.nodes[0]);
 
           //Make the selections
-          _this.backendApi.selectValues(0,connectedNodes,false);
+          component.backendApi.selectValues(0,connectedNodes,false);
         }
       }
     });
   }
 }
 
-export default paint;
+function themePaint ($element, layout) {
+  const component = this;
+  try {
+    const app = qlik.currApp(this);
+
+    app.theme.getApplied().then( function( qTheme ) {
+      paint($element, layout, qTheme, component);
+    });
+  } catch (exception) {
+    console.error(exception); // eslint-disable-line no-console
+  }
+}
+
+export default themePaint;

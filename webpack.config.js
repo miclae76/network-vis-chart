@@ -16,6 +16,14 @@ const config = {
     filename: settings.name + '.js',
     libraryTarget: 'umd'
   },
+  externals: {
+    qlik: {
+      amd: 'qlik',
+      commonjs: 'qlik',
+      commonjs2: 'qlik',
+      root: '_'
+    }
+  },
   module: {
     rules: [
       {
