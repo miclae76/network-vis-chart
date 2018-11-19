@@ -22,30 +22,41 @@ const component = {
     }
   },
   //property panel
+  data: {
+    dimensions: {
+      min: 4,
+      max: 4
+      /*
+      1. Dimension: Node ID, numeric (Event ID or else) or String
+      2. Dimension: Node Label
+      3. Dimension: Node Parent ID, numeric (Event ID or else) or String
+      4. Dimension: Node Cluster
+      */
+    },
+    measures: {
+      min: 0,
+      max: 3
+      /*
+      1. Measure: title text for tooltip (optional)
+      2. Measure: node value
+      3. Measure: edge value
+      */
+    }
+  },
   definition: {
     type: "items",
     component: "accordion",
     items: {
-      dimensions: {
-        uses: "dimensions",
-        min: 4,
-        max: 4
-        /*
-        1. Dimension: Node ID, numeric (Event ID or else) or String
-        2. Dimension: Node Label
-        3. Dimension: Node Parent ID, numeric (Event ID or else) or String
-        4. Dimension: Node Cluster
-        */
-      },
-      measures: {
-        uses: "measures",
-        min: 0,
-        max: 3
-        /*
-        1. Measure: title text for tooltip (optional)
-        2. Measure: node value
-        3. Measure: edge value
-        */
+      data: {
+        uses: "data",
+        items:{
+          dimensions:{
+            disabledRef: ""
+          },
+          measures: {
+            disabledRef: ""
+          }
+        }
       },
       sorting: {
         uses: "sorting"
@@ -59,7 +70,8 @@ const component = {
         }
       },
       settings: {
-        uses: "settings",
+        type: "items",
+        label: "Settings",
         items: {
           edgeType: {
             ref: "edgeType",
