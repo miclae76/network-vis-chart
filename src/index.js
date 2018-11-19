@@ -77,7 +77,7 @@ const component = {
             ref: "edgeType",
             type: "string",
             component: "dropdown",
-            label: "Egde Type",
+            label: "Edge Type",
             options: [
               { value: 'dynamic' },
               { value: 'continuous' },
