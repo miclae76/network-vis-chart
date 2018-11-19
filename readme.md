@@ -31,6 +31,9 @@ The measures are optional
 QVF based on characters from Victor Hugo's novel , Les Misérables.
 ![Network chart](resources/network_chart_v1.png)
 
+### Data Limit
+Starts having issues stabilizing(transforming into untangled view) at around 100-200 nodes depending on dataset.
+
 
 # Getting Started
 
