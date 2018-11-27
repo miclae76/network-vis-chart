@@ -1,7 +1,7 @@
 {
 	"name" : "Network chart",
 	"description" : "Display hierarchical or relational dimensions as nodes and edges, adding measures to show the significance of the links.",
-	"icon" : "extension",
+	"icon" : "bubbles",
 	"type" : "visualization",
 	"version": "X.Y.Z",
 	"preview" : "network.png",
