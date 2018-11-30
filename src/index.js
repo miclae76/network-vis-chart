@@ -153,7 +153,7 @@ const component = {
     export: true
   },
   snapshot: {
-    canTakeSnapshot: true
+    canTakeSnapshot: false
   },
   paint: paint
 };
