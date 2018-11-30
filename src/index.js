@@ -150,7 +150,8 @@ const component = {
     }
   },
   support: {
-    export: true
+    export: true,
+    snapshot: false
   },
   snapshot: {
     canTakeSnapshot: false
