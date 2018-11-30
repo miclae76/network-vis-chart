@@ -8,9 +8,9 @@ Tested with Qlik Sense 2.2.3.
 ### Dimensions
 4 dimensions are mandatory :
 
-  1. node identifier
-  2. node label
-  3. node parent identifier
+  1. node identifier (consecutive numbers starting at 0)
+  2. node label (Any text)
+  3. node parent identifier (Refers to node indentifier)
   4. node group
 
 ### Measures
@@ -28,6 +28,8 @@ The measures are optional
 * Display Shadow : switch to enable shadow effects behind edge and nodes
 
 ### Sample
+A data sample can be found here: https://github.com/qlik-oss/network-vis-chart/blob/master/resources/Network%20data.xlsx
+
 QVF based on characters from Victor Hugo's novel , Les Misérables.
 ![Network chart](resources/network_chart_v1.png)
 
