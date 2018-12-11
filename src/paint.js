@@ -37,10 +37,10 @@ function paint ( $element, layout, qTheme, component ) {
       const groupNumber = e[3].qText;
 
       const dataItem = {
-        id: e[0].qNum,
+        id: e[0].qText,
         label: nodeName,
         group: groupNumber,
-        parentid : e[2].qNum
+        parentid : e[2].qText
       };
 
       // optional measures set
@@ -174,9 +174,17 @@ function paint ( $element, layout, qTheme, component ) {
           var connectedNodes = network.getConnectedNodes(properties.nodes[0]);
           // append node to the array
           connectedNodes.push(properties.nodes[0]);
-
+          var toSelect = connectedNodes.map(function(node) {
+            var id;
+            data.nodes.forEach(function(dataNode, index) {
+              if(dataNode.id === node) {
+                id = index;
+              }
+            });
+            return id;
+          });
           //Make the selections
-          component.backendApi.selectValues(0,connectedNodes,false);
+          component.backendApi.selectValues(0,toSelect,false);
         }
       }
     });
