@@ -3,20 +3,16 @@ import qlik from 'qlik';
 import { createTooltipHTML } from './tooltip';
 import { escapeHTML } from './utilities';
 
-const colorScheme = 'Diverging Classes';
-
 function isTextCellNotEmpty(c) {
   return (c.qText && !(c.qIsNull || c.qText.trim() == ''));
 }
 
-function paint ( $element, layout, qTheme, component ) {
-  const colorScale = qTheme.properties.scales
-    .find(scale => scale.name === colorScheme).scale;
-  const colors = colorScale[colorScale.length - 1];
+function getColor (index, colors) {
+  return colors[index % colors.length];
+}
 
-  function getColor (number) {
-    return colors[number % colors.length];
-  }
+function paint ( $element, layout, qTheme, component ) {
+  const colorScale = qTheme.properties.palettes.data[0];
 
   var qData = layout.qHyperCube.qDataPages[0],
     id = layout.qInfo.qId,
@@ -111,11 +107,13 @@ function paint ( $element, layout, qTheme, component ) {
           value: dataSet[i].nodeValue
         };
         nodes.push(nodeItem); // create node
-        groups[nodeItem.group] = {
-          color: getColor(nodeItem.group)
-        };
       }
     }
+    const colors = colorScale.scale[Math.max(Object.keys(groups).length-1, colorScale.scale.length-1)];
+
+    Object.keys(groups).forEach(function(g,i) {
+      groups[g].color = getColor(i, colors);
+    });
 
     // create dataset for \\
     var data = {
