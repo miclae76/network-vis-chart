@@ -24,7 +24,7 @@ const component = {
   //property panel
   data: {
     dimensions: {
-      min: 4,
+      min: 3,
       max: 4
       /*
       1. Dimension: Node ID, numeric (Event ID or else) or String

@@ -13,6 +13,8 @@ function getColor (index, colors) {
 
 function paint ( $element, layout, qTheme, component ) {
   const colorScale = qTheme.properties.palettes.data[0];
+  const numDimensions = layout.qHyperCube.qDimensionInfo.length;
+  const numMeasures = layout.qHyperCube.qMeasureInfo.length;
 
   var qData = layout.qHyperCube.qDataPages[0],
     id = layout.qInfo.qId,
@@ -30,24 +32,29 @@ function paint ( $element, layout, qTheme, component ) {
 
     var dataSet = qData.qMatrix.map(function(e){
       const nodeName = e[1].qText;
-      const groupNumber = e[3].qText;
+      let groupNumber;
 
       const dataItem = {
         id: e[0].qText,
         label: nodeName,
-        group: groupNumber,
         parentid : e[2].qText
       };
 
+      if(numDimensions === 4) {
+        groupNumber = e[3].qText;
+        dataItem.group = groupNumber;
+      }
+
       // optional measures set
-      if (e.length > 4) {
-        const tooltip = e[4];
+      if (numMeasures > 0) {
+        const tooltip = e[numDimensions];
 
         if (isTextCellNotEmpty(tooltip)) {
           const tooltipText = tooltip.qText;
           dataItem.title = escapeHTML(tooltipText);
-        } else {
-          const nodeMeasure = e[5].qText;
+        } else if(numMeasures > 1) {
+          // This part is a bit fishy and should be tested
+          const nodeMeasure = e[numDimensions+1].qText;
           dataItem.title = createTooltipHTML({
             name: nodeName,
             groupNumber,
@@ -56,17 +63,17 @@ function paint ( $element, layout, qTheme, component ) {
         }
       }
 
-      if (e.length > 5) {
-        if (e[5].qNum) {
+      if (numMeasures > 1) {
+        if (e[numDimensions+1].qNum) {
           // node value - to scale node shape size
           dataItem.nodeValue = e[5].qNum;
         }
       }
 
-      if (e.length > 6) {
-        if (e[6].qNum) {
+      if (numMeasures > 2) {
+        if (e[numDimensions+2].qNum) {
           // edge value - to scale edge width
-          dataItem.edgeValue = e[6].qNum;
+          dataItem.edgeValue = e[numDimensions+2].qNum;
         }
       }
 
