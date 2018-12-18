@@ -9,6 +9,30 @@ import "@babel/polyfill";
 import paint from './paint';
 import './styles/main.less';
 
+const dimDesc = [
+  "Node Identifier",
+  "Node Label",
+  "Node Parent",
+  "Node Group"
+];
+
+const dimLongDesc = [
+  "Node Identifier - a field in the dataset which should be presented as a node in the network diagram."
+  + " these control the actual elements presented in the network diagram.",
+  "Node Label - controls what field holds the data that described the nodes in the network"
+  + " diagram. The field content will be presented as label.",
+  "Node Parent - is used to determine the ancestor node for the individual nodes."
+  + " This field will be used for describing the relationships between network elements.",
+  "Node Group - is a field which describes groups of a node in the network."
+  + " This is used to apply the same color to several nodes."
+];
+
+const measureDesc = [
+  "Tooltip",
+  "Node size",
+  "Edge size"
+];
+
 const component = {
   initialProperties: {
     version: 1.0,
@@ -25,7 +49,10 @@ const component = {
   data: {
     dimensions: {
       min: 3,
-      max: 4
+      max: 4,
+      description(properties, index) {
+        return dimDesc[index];
+      }
       /*
       1. Dimension: Node ID, numeric (Event ID or else) or String
       2. Dimension: Node Label
@@ -35,7 +62,10 @@ const component = {
     },
     measures: {
       min: 0,
-      max: 3
+      max: 3,
+      description(properties, index) {
+        return measureDesc[index];
+      }
       /*
       1. Measure: title text for tooltip (optional)
       2. Measure: node value
@@ -51,7 +81,22 @@ const component = {
         uses: "data",
         items:{
           dimensions:{
-            disabledRef: ""
+            disabledRef: "",
+            items: {
+              helpDesc: {
+                component: 'text',
+                style: 'qlik-network-chart-italic-property',
+                label: function(properties, handler) {
+                  var index;
+                  handler.getDimensions().forEach((element, i) => {
+                    if(element.qDef.cId === properties.qDef.cId) {
+                      index = i;
+                    }
+                  });
+                  return dimLongDesc[index];
+                }
+              }
+            }
           },
           measures: {
             disabledRef: ""

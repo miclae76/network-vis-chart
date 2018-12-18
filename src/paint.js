@@ -36,6 +36,7 @@ function paint ( $element, layout, qTheme, component ) {
 
       const dataItem = {
         id: e[0].qText,
+        eNum: e[0].qElemNumber,
         label: nodeName,
         parentid : e[2].qText
       };
@@ -108,6 +109,7 @@ function paint ( $element, layout, qTheme, component ) {
 
         var nodeItem = {
           id: dataSet[i].id,
+          eNum: dataSet[i].eNum,
           label: dataSet[i].label,
           title: dataSet[i].title,
           group: dataSet[i].group,
@@ -179,14 +181,19 @@ function paint ( $element, layout, qTheme, component ) {
           var connectedNodes = network.getConnectedNodes(properties.nodes[0]);
           // append node to the array
           connectedNodes.push(properties.nodes[0]);
-          var toSelect = connectedNodes.map(function(node) {
+          const toSelect = [];
+          connectedNodes.forEach(function(node) {
             var id;
-            data.nodes.forEach(function(dataNode, index) {
-              if(dataNode.id === node) {
-                id = index;
+            data.nodes.forEach(function(dataNode) {
+              // Find match, ignore null
+              if(dataNode.id === node && node !== "-") {
+                id = dataNode.eNum;
               }
             });
-            return id;
+            if(id !== undefined) {
+              // Remove duplicates
+              toSelect.indexOf(id) === -1 && toSelect.push(id);
+            }
           });
           //Make the selections
           component.backendApi.selectValues(0,toSelect,false);
