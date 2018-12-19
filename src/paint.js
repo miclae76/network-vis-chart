@@ -88,7 +88,7 @@ function paint ( $element, layout, qTheme, component ) {
     const groups = {};
 
     for(let i = 0; i< dataSet.length; i++){
-      if (layout.displayEdgeLabel) {
+      if (layout.displayEdgeLabel && dataSet[i].edgeValue !== undefined) {
         edges.push({
           "from":dataSet[i].id,
           "to":dataSet[i].parentid,
