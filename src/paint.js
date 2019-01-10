@@ -116,9 +116,10 @@ function paint ( $element, layout, qTheme, component ) {
           value: dataSet[i].nodeValue
         };
         nodes.push(nodeItem); // create node
+        groups[nodeItem.group] = {};
       }
     }
-    const colors = colorScale.scale[Math.max(Object.keys(groups).length-1, colorScale.scale.length-1)];
+    const colors = colorScale.scale[Math.min(Object.keys(groups).length-1, colorScale.scale.length-1)];
 
     Object.keys(groups).forEach(function(g,i) {
       groups[g].color = getColor(i, colors);
