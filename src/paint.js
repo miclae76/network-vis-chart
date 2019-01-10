@@ -3,20 +3,18 @@ import qlik from 'qlik';
 import { createTooltipHTML } from './tooltip';
 import { escapeHTML } from './utilities';
 
-const colorScheme = 'Diverging Classes';
-
 function isTextCellNotEmpty(c) {
   return (c.qText && !(c.qIsNull || c.qText.trim() == ''));
 }
 
-function paint ( $element, layout, qTheme, component ) {
-  const colorScale = qTheme.properties.scales
-    .find(scale => scale.name === colorScheme).scale;
-  const colors = colorScale[colorScale.length - 1];
+function getColor (index, colors) {
+  return colors[index % colors.length];
+}
 
-  function getColor (number) {
-    return colors[number % colors.length];
-  }
+function paint ( $element, layout, qTheme, component ) {
+  const colorScale = qTheme.properties.palettes.data[0];
+  const numDimensions = layout.qHyperCube.qDimensionInfo.length;
+  const numMeasures = layout.qHyperCube.qMeasureInfo.length;
 
   var qData = layout.qHyperCube.qDataPages[0],
     id = layout.qInfo.qId,
@@ -34,24 +32,30 @@ function paint ( $element, layout, qTheme, component ) {
 
     var dataSet = qData.qMatrix.map(function(e){
       const nodeName = e[1].qText;
-      const groupNumber = e[3].qText;
+      let groupNumber;
 
       const dataItem = {
-        id: e[0].qNum,
+        id: e[0].qText,
+        eNum: e[0].qElemNumber,
         label: nodeName,
-        group: groupNumber,
-        parentid : e[2].qNum
+        parentid : e[2].qText
       };
 
+      if(numDimensions === 4) {
+        groupNumber = e[3].qText;
+        dataItem.group = groupNumber;
+      }
+
       // optional measures set
-      if (e.length > 4) {
-        const tooltip = e[4];
+      if (numMeasures > 0) {
+        const tooltip = e[numDimensions];
 
         if (isTextCellNotEmpty(tooltip)) {
           const tooltipText = tooltip.qText;
           dataItem.title = escapeHTML(tooltipText);
-        } else {
-          const nodeMeasure = e[5].qText;
+        } else if(numMeasures > 1) {
+          // This part is a bit fishy and should be tested
+          const nodeMeasure = e[numDimensions+1].qText;
           dataItem.title = createTooltipHTML({
             name: nodeName,
             groupNumber,
@@ -60,17 +64,17 @@ function paint ( $element, layout, qTheme, component ) {
         }
       }
 
-      if (e.length > 5) {
-        if (e[5].qNum) {
+      if (numMeasures > 1) {
+        if (e[numDimensions+1].qNum) {
           // node value - to scale node shape size
           dataItem.nodeValue = e[5].qNum;
         }
       }
 
-      if (e.length > 6) {
-        if (e[6].qNum) {
+      if (numMeasures > 2) {
+        if (e[numDimensions+2].qNum) {
           // edge value - to scale edge width
-          dataItem.edgeValue = e[6].qNum;
+          dataItem.edgeValue = e[numDimensions+2].qNum;
         }
       }
 
@@ -84,7 +88,7 @@ function paint ( $element, layout, qTheme, component ) {
     const groups = {};
 
     for(let i = 0; i< dataSet.length; i++){
-      if (layout.displayEdgeLabel) {
+      if (layout.displayEdgeLabel && dataSet[i].edgeValue !== undefined) {
         edges.push({
           "from":dataSet[i].id,
           "to":dataSet[i].parentid,
@@ -105,17 +109,20 @@ function paint ( $element, layout, qTheme, component ) {
 
         var nodeItem = {
           id: dataSet[i].id,
+          eNum: dataSet[i].eNum,
           label: dataSet[i].label,
           title: dataSet[i].title,
           group: dataSet[i].group,
           value: dataSet[i].nodeValue
         };
         nodes.push(nodeItem); // create node
-        groups[nodeItem.group] = {
-          color: getColor(nodeItem.group)
-        };
       }
     }
+    const colors = colorScale.scale[Math.max(Object.keys(groups).length-1, colorScale.scale.length-1)];
+
+    Object.keys(groups).forEach(function(g,i) {
+      groups[g].color = getColor(i, colors);
+    });
 
     // create dataset for \\
     var data = {
@@ -174,9 +181,22 @@ function paint ( $element, layout, qTheme, component ) {
           var connectedNodes = network.getConnectedNodes(properties.nodes[0]);
           // append node to the array
           connectedNodes.push(properties.nodes[0]);
-
+          const toSelect = [];
+          connectedNodes.forEach(function(node) {
+            var id;
+            data.nodes.forEach(function(dataNode) {
+              // Find match, ignore null
+              if(dataNode.id === node && node !== "-") {
+                id = dataNode.eNum;
+              }
+            });
+            if(id !== undefined) {
+              // Remove duplicates
+              toSelect.indexOf(id) === -1 && toSelect.push(id);
+            }
+          });
           //Make the selections
-          component.backendApi.selectValues(0,connectedNodes,false);
+          component.backendApi.selectValues(0,toSelect,false);
         }
       }
     });
