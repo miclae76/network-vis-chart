@@ -5,7 +5,10 @@ Tested on Qlik Sense 2.2.3
 Agilos.com takes no responsibility for any code.
 Use at your own risk.
 */
-import "@babel/polyfill";
+if (!window._babelPolyfill) { // eslint-disable-line no-underscore-dangle
+  require('@babel/polyfill'); // eslint-disable-line global-require
+}
+
 import paint from './paint';
 import './styles/main.less';
 
