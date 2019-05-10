@@ -1,18 +1,15 @@
 {
   "name": "qlik-network-chart",
   "version": "0.0.1",
-  "description": "Network chart",
-  "keywords": "network chart qliksense extension",
+  "description": "Displays hierarchical or relational dimensions as nodes and edges´, with measures to show the significance of its links.",
+  "homepage": "",
   "repository": "https://github.com/qlik-oss/network-vis-chart",
   "author": "Michael Laenen (miclae76) <m.laenen@contactoffice.net>",
   "license": "MIT",
   "scripts": {
     "build": "gulp build",
-    "eslint": "eslint src",
-    "eslint:fix": "eslint --fix src",
-    "test": "karma start karma.conf.js",
-    "test-once": "karma start karma.conf.js --single-run",
-    "watch": "gulp watch"
+    "build:zip": "gulp zip",
+    "eslint": "eslint src"
   },
   "devDependencies": {
     "@babel/core": "7.1.5",
@@ -20,29 +17,20 @@
     "@babel/preset-env": "7.1.5",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.4",
-    "copy-webpack-plugin": "4.6.0",
     "css-loader": "1.0.1",
     "del": "3.0.0",
     "eslint": "5.8.0",
     "eslint-loader": "2.1.1",
     "file-loader": "2.0.0",
     "gulp": "4.0.0",
-    "gulp-json-editor": "2.4.3",
+    "gulp-util": "^3.0.7",
     "gulp-zip": "4.2.0",
-    "jasmine-core": "3.3.0",
-    "karma": "3.1.1",
-    "karma-chrome-launcher": "2.2.0",
-    "karma-jasmine": "1.1.2",
-    "karma-sourcemap-loader": "0.3.7",
-    "karma-webpack": "3.0.5",
     "less": "3.8.1",
     "less-loader": "4.1.0",
     "style-loader": "0.23.1",
     "stylelint": "9.7.1",
     "stylelint-webpack-plugin": "0.10.5",
-    "webpack": "4.25.1",
-    "webpack-cli": "3.1.2",
-    "webpack-dev-server": "3.1.10"
+    "webpack": "4.25.1"
   },
   "dependencies": {
     "vis": "4.21.0"
