@@ -205,7 +205,7 @@ const component = {
             component: 'text'
           },
           paragraph1: {
-            label: `Network chart is Qlik Sense chart which allows you you draw a network of connected nodes and edges from a data set to a sheet.`,
+            label: `Network chart is Qlik Sense chart which allows you to draw a network of connected nodes and edges from a data set to a sheet.`,
             component: 'text'
           },
           paragraph2: {
