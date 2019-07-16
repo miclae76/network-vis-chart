@@ -194,6 +194,25 @@ const component = {
             defaultValue: false
           }
         }
+      },
+      about: {
+        component: 'items',
+        label: 'About',
+        items: {
+          header: {
+            label: 'Network chart',
+            style: 'header',
+            component: 'text'
+          },
+          paragraph1: {
+            label: `Network chart is Qlik Sense chart which allows you you draw a network of connected nodes and edges from a data set to a sheet.`,
+            component: 'text'
+          },
+          paragraph2: {
+            label: 'Network chart is based upon an extension created by Michael Laenen.',
+            component: 'text'
+          }
+        }
       }
     }
   },
