@@ -218,10 +218,11 @@ const component = {
   },
   support: {
     export: true,
-    snapshot: false
+    snapshot: true,
+    exportData: true
   },
   snapshot: {
-    canTakeSnapshot: false
+    canTakeSnapshot: true
   },
   paint: paint
 };
