@@ -179,7 +179,7 @@ function paint ( $element, layout, qTheme, component ) {
       $("#"+containerId).css('cursor','default');
 
       network.on('select', function (properties) {
-        if (properties.hasOwnProperty("nodes")) {
+        if (properties.hasOwnProperty("nodes") && component.options.noInteraction !== true) {
           if (properties.nodes.length > 0) {
             // find connected nodes to selection
             var connectedNodes = network.getConnectedNodes(properties.nodes[0]);
