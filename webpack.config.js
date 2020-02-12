@@ -2,6 +2,8 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const packageJSON = require('./package.json');
 const path = require('path');
 const webpack = require('webpack');
+const SOURCE_MAP = 'sourec-map';
+const DEVTOOL = (process.env.NODE_ENV === 'development') ? SOURCE_MAP : false;
 
 const DIST = path.resolve("./dist");
 const MODE = process.env.NODE_ENV || 'development';
@@ -9,7 +11,7 @@ const MODE = process.env.NODE_ENV || 'development';
 console.log('Webpack mode:', MODE); // eslint-disable-line no-console
 
 const config = {
-  devtool: 'source-map',
+  devtool: DEVTOOL,
   entry: [
     './src/index.js'
   ],
