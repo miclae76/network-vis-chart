@@ -12,9 +12,7 @@ function getColor (index, colors) {
 }
 
 function paint ( $element, layout, qTheme, component ) {
-
   return new qlik.Promise(function(resolve) {
-
     const colorScale = qTheme.properties.palettes.data[0];
     const numDimensions = layout.qHyperCube.qDimensionInfo.length;
     const numMeasures = layout.qHyperCube.qMeasureInfo.length;
@@ -179,7 +177,7 @@ function paint ( $element, layout, qTheme, component ) {
       $("#"+containerId).css('cursor','default');
 
       network.on('select', function (properties) {
-        if (properties.hasOwnProperty("nodes") && component.options.noInteraction !== true) {
+        if (Object.prototype.hasOwnProperty.call(properties, "nodes") && component.options.noInteraction !== true) { 
           if (properties.nodes.length > 0) {
             // find connected nodes to selection
             var connectedNodes = network.getConnectedNodes(properties.nodes[0]);
