@@ -18,3 +18,7 @@ If you want to do code changes to the extension follow these simple steps to get
 # Original Author
 **Michael Laenen**
 * [github.com/miclae76](https://github.com/miclae76)
+
+# Contributors
+**Göran Sander**
+* [github.com/mountaindude](https://github.com/mountaindude)
