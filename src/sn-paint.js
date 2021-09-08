@@ -136,7 +136,7 @@ export default function paint ( { element,layout, theme, component } ) {
       var options = {
         groups: groups,
         layout: {
-          randomSeed: "0.6610209392878246:1631081903504"
+          randomSeed: 34545 //"0.6610209392878246:1631081903504"
         },
         nodes: {
           shape:layout.nodeShape,
