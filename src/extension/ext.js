@@ -1,6 +1,6 @@
 import { dimLongDesc } from './strings';
 
-export default function ext(env) {
+export default function ext() {
   return {
     definition: {
       type: "items",
@@ -131,7 +131,10 @@ export default function ext(env) {
               component: 'text'
             },
             paragraph1: {
-              label: `Network chart is Qlik Sense chart which allows you to draw a network of connected nodes and edges from a data set to a sheet.`,
+              label:
+              `Network chart is Qlik Sense chart which
+              allows you to draw a network of connected
+              nodes and edges from a data set to a sheet.`,
               component: 'text'
             },
             paragraph2: {
@@ -151,5 +154,4 @@ export default function ext(env) {
       canTakeSnapshot: true
     },
   };
-
 }

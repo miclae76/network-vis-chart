@@ -17,7 +17,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: npm install
+          command: yarn
       - run:
           name: BlackDuck scan
           command: curl -s https://detect.synopsys.com/detect.sh | bash -s -- \
@@ -47,13 +47,13 @@ jobs:
           at: ~/qlik-network-chart
       - run:
           name: Install dependencies
-          command: npm install
+          command: yarn
       - run:
           name: Build and package
           command: |
             export VERSION=$(scripts/get-bumped-version.sh)
             echo "Version: ${VERSION}"
-            npm run build:zip
+            yarn build:zip
             sudo chmod +x scripts/verify-files.sh
             scripts/verify-files.sh
           environment:

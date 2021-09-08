@@ -9,9 +9,8 @@
   "scripts": {
     "start": "nebula serve  --build false  --type viz-network-chart",
     "watch": "nebula serve --type viz-network-chart",
-    "nebula-build": "nebula build ",
-    "build": "gulp build",
-    "build:zip": "gulp zip",
+    "build": "nebula build ",
+    "build:zip": "gulp clean && yarn build && gulp zip",
     "eslint": "eslint src"
   },
   "main": "dist/viz-network-chart.js",
@@ -45,7 +44,6 @@
     "@nebula.js/stardust": ">=1.0.0"
   },
   "dependencies": {
-    "vis": "4.21.0",
     "vis-network": "9.1.0",
     "vis-data": "^7.0.0"
   }

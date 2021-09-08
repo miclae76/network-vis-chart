@@ -2,8 +2,6 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var zip = require('gulp-zip');
 var del = require('del');
-var webpackConfig = require('./webpack.config');
-var webpack = require('webpack');
 var pkg = require('./package.json');
 
 var DIST = './dist';
@@ -19,6 +17,7 @@ gulp.task('qext', function () {
 		preview: 'network.png',
 		keywords: 'qlik-sense, visualization',
 		author: pkg.author,
+		supernova: true,
 		homepage: pkg.homepage,
 		license: pkg.license,
 		repository: pkg.repository,
@@ -47,7 +46,6 @@ gulp.task('qext', function () {
 gulp.task('clean', function(){
   return del([DIST], { force: true });
 });
-
 gulp.task('zip-build', function(){
   return gulp.src(DIST + '/**/*')
     .pipe(zip(`${pkg.name}_${VERSION}.zip`))
@@ -58,30 +56,10 @@ gulp.task('add-assets', function(){
   return gulp.src('./assets/**/*').pipe(gulp.dest(DIST));
 });
 
-gulp.task('webpack-build', done => {
-  webpack(webpackConfig, (error, statistics) => {
-    const compilationErrors = statistics && statistics.compilation.errors;
-    const hasCompilationErrors = !statistics || (compilationErrors && compilationErrors.length > 0);
-
-    console.log(statistics && statistics.toString({ chunks: false, colors: true })); // eslint-disable-line no-console
-
-    if (error || hasCompilationErrors) {
-      console.log('Build has errors or eslint errors, fail it'); // eslint-disable-line no-console
-      process.exit(1);
-    }
-
-    done();
-  });
-});
-
-gulp.task('build',
-  gulp.series('clean', 'webpack-build', 'qext', 'add-assets')
-);
 
 gulp.task('zip',
-  gulp.series('build', 'zip-build')
+  gulp.series( 'qext', 'add-assets', 'zip-build')
 );
-
-gulp.task('default',
-  gulp.series('build')
+gulp.task('clean',
+  gulp.series( 'clean')
 );

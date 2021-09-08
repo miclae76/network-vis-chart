@@ -2,14 +2,13 @@ import { useElement, usePromise, useEffect, useLayout, useTheme, useRect, useSta
 import data from './extension/data';
 import ext from './extension/ext';
 import properties from './extension/properties';
-import paint from './sn-paint'
+import paint from './sn-paint';
 
-export default function supernova(env) {
-  const { sense } = env;
+export default function supernova() {
   return {
     qae: {
       properties,
-      data: data(env),
+      data: data(),
     },
     component() {
       const layout = useLayout();
@@ -26,17 +25,16 @@ export default function supernova(env) {
             selectValues: ()=>{}
           }
         }
-      }
+      };
       useEffect(()=> {
         network && network.fit();
       }, [rect.width, rect.height]);
 
       usePromise(()=>
-        paint({element,layout, theme, component}).then((n)=>setNetwork(n)),
+        paint({ element,layout, theme, component }).then((n)=>setNetwork(n)),
       [layout, element, theme ]);
-
     },
 
-    ext: ext(env),
+    ext: ext(),
   };
 }

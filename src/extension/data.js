@@ -1,6 +1,6 @@
 import { dimDesc, measureDesc } from './strings';
 
-export default function data(env) {
+export default function data() {
   return {
     targets: [{
       path: '/qHyperCubeDef',

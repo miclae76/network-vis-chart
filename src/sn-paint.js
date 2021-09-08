@@ -1,7 +1,7 @@
 import { Network } from 'vis-network';
 import { createTooltipHTML } from './tooltip';
 import { escapeHTML } from './utilities';
-import './styles/main.css'
+import './styles/main.css';
 
 function isTextCellNotEmpty(c) {
   return (c.qText && !(c.qIsNull || c.qText.trim() == ''));
@@ -11,7 +11,7 @@ function getColor (index, colors) {
   return colors[index % colors.length];
 }
 
-export default function paint ( {element,layout, theme, component} ) {
+export default function paint ( { element,layout, theme, component } ) {
   return new Promise((resolve) => {
     const colorScale = theme.getDataColorPalettes()[0];
     const numDimensions = layout.qHyperCube.qDimensionInfo.length;
@@ -23,8 +23,8 @@ export default function paint ( {element,layout, theme, component} ) {
 
     if(qData && qData.qMatrix) {
       element.textContent = '';
-      const topDiv = document.createElement("div")
-      topDiv.setAttribute('id', containerId)
+      const topDiv = document.createElement("div");
+      topDiv.setAttribute('id', containerId);
       topDiv.classList.add('sn-network-top');
       component.inEditState() && topDiv.classList.add('is-edit-mode');
       element.append(topDiv);
