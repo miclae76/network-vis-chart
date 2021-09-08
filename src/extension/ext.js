@@ -1,6 +1,6 @@
 import { dimLongDesc } from './strings';
 
-export default function ext(env) {
+export default function ext() {
   return {
     definition: {
       type: "items",
