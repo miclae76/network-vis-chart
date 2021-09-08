@@ -20,7 +20,8 @@ jobs:
           command: yarn
       - run:
         name: Lint
-          command: yarn eslint
+          command: |
+            yarn eslint
       - run:
           name: BlackDuck scan
           command: curl -s https://detect.synopsys.com/detect.sh | bash -s -- \
