@@ -40,11 +40,8 @@ jobs:
           name: Install dependencies
           command: yarn
       - run:
-          name: Build and verify
-          command: |
-            yarn build
-            sudo chmod +x scripts/verify-files.sh
-            scripts/verify-files.sh
+          name: Build
+          command: yarn build
           environment:
             NODE_ENV: production
       - persist_to_workspace:
