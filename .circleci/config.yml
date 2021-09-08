@@ -10,7 +10,7 @@ defaults: &defaults
     PACKAGE_NAME: "qlik-network-chart"
 
 jobs:
-  test:
+  build:
     docker:
     - image: circleci/node:stretch-browsers
     steps:
