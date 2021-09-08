@@ -15,8 +15,6 @@ jobs:
     - image: circleci/node:stretch-browsers
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/qlik-network-chart
       - run:
           name: Install dependencies
           command: yarn
@@ -36,13 +34,6 @@ jobs:
           command: yarn build
           environment:
             NODE_ENV: production
-      - persist_to_workspace:
-          root: ~/qlik-network-chart
-          paths:
-            - dist
-      - store_artifacts:
-          path: dist
-          destination: dist
 
 workflows:
   version: 2
