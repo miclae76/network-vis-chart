@@ -10,7 +10,6 @@
     "start": "nebula serve  --build false  --type qlik-network-chart",
     "watch": "nebula serve --type qlik-network-chart",
     "build": "nebula build ",
-    "build:zip": "gulp clean && yarn build && gulp zip",
     "eslint": "eslint src"
   },
   "main": "dist/qlik-network-chart.js",
@@ -21,11 +20,7 @@
     "@nebula.js/cli-serve": "1.7.0",
     "@nebula.js/stardust": "1.7.0",
     "babel-eslint": "10.1.0",
-    "del": "6.0.0",
-    "eslint": "7.32.0",
-    "gulp": "4.0.2",
-    "gulp-util": "^3.0.7",
-    "gulp-zip": "5.1.0"
+    "eslint": "7.32.0"
   },
   "peerDependencies": {
     "@nebula.js/stardust": ">=1.0.0"
