@@ -7,14 +7,23 @@
   "author": "Michael Laenen (miclae76) <m.laenen@contactoffice.net>",
   "license": "MIT",
   "scripts": {
+    "start": "nebula serve  --build false  --type viz-network-chart",
+    "watch": "nebula serve --type viz-network-chart",
+    "nebula-build": "nebula build ",
     "build": "gulp build",
     "build:zip": "gulp zip",
     "eslint": "eslint src"
   },
+  "main": "dist/viz-network-chart.js",
   "devDependencies": {
     "@babel/core": "7.15.0",
     "@babel/polyfill": "7.12.1",
     "@babel/preset-env": "7.15.0",
+    "@nebula.js/cli": "1.7.0",
+    "@nebula.js/cli-build": "1.7.0",
+    "@nebula.js/cli-sense": "1.7.0",
+    "@nebula.js/cli-serve": "1.7.0",
+    "@nebula.js/stardust": "1.7.0",
     "babel-eslint": "10.1.0",
     "babel-loader": "8.2.2",
     "css-loader": "6.2.0",
@@ -32,7 +41,12 @@
     "stylelint-webpack-plugin": "3.0.1",
     "webpack": "5.51.1"
   },
+  "peerDependencies": {
+    "@nebula.js/stardust": ">=1.0.0"
+  },
   "dependencies": {
-    "vis": "4.21.0"
+    "vis": "4.21.0",
+    "vis-network": "9.1.0",
+    "vis-data": "^7.0.0"
   }
 }
