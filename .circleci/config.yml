@@ -10,7 +10,7 @@ defaults: &defaults
     PACKAGE_NAME: "qlik-network-chart"
 
 jobs:
-  test:
+  build:
     docker:
     - image: circleci/node:stretch-browsers
     steps:
@@ -29,16 +29,6 @@ jobs:
             --blackduck.username="svc-blackduck" \
             --blackduck.password=${svc_blackduck} \
             --detect.project.name="viz-bundle-qlik-network-chart"
-
-  build:
-    <<: *defaults
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/qlik-network-chart
-      - run:
-          name: Install dependencies
-          command: yarn
       - run:
           name: Build
           command: yarn build
@@ -56,7 +46,4 @@ workflows:
   version: 2
   master_flow:
     jobs:
-      - test
-      - build:
-          requires:
-            - test
+      - build
