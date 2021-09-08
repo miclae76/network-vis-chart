@@ -34,6 +34,9 @@ jobs:
           command: yarn build
           environment:
             NODE_ENV: production
+      - store_artifacts:
+          path: dist
+          destination: dist
 
 workflows:
   version: 2
