@@ -1,4 +1,7 @@
 # Qlik Network Chart
+
+### **_The network chart is getting an overhaul with a conversion to Nebula and updated dependencies: see branch [network-next](https://github.com/qlik-oss/network-vis-chart/tree/network-next)_**
+
 This extension is part of the extension bundles for Qlik Sense. The repository is maintained and moderated by Qlik RD.
 
 Feel free to fork and suggest pull requests for improvements and bug fixes. Changes will be moderated and reviewed before inclusion in future bundle versions. Please note that emphasis is on backward compatibility, i.e. breaking changes will most likely not be approved.
