@@ -19,9 +19,8 @@ jobs:
           name: Install dependencies
           command: yarn
       - run:
-        name: Lint
-          command: |
-            yarn eslint
+          name: Lint
+          command: yarn eslint
       - run:
           name: BlackDuck scan
           command: curl -s https://detect.synopsys.com/detect.sh | bash -s -- \
