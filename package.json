@@ -7,13 +7,13 @@
   "author": "Michael Laenen (miclae76) <m.laenen@contactoffice.net>",
   "license": "MIT",
   "scripts": {
-    "start": "nebula serve  --build false  --type viz-network-chart",
-    "watch": "nebula serve --type viz-network-chart",
+    "start": "nebula serve  --build false  --type qlik-network-chart",
+    "watch": "nebula serve --type qlik-network-chart",
     "build": "nebula build ",
     "build:zip": "gulp clean && yarn build && gulp zip",
     "eslint": "eslint src"
   },
-  "main": "dist/viz-network-chart.js",
+  "main": "dist/qlik-network-chart.js",
   "devDependencies": {
     "@nebula.js/cli": "1.7.0",
     "@nebula.js/cli-build": "1.7.0",
