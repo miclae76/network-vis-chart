@@ -1,18 +1,27 @@
 {
-  "name": "qlik-network-chart",
+  "name": "sn-network-chart",
   "version": "0.0.1",
   "description": "Displays hierarchical or relational dimensions as nodes and edges´, with measures to show the significance of its links.",
   "homepage": "",
   "repository": "https://github.com/qlik-oss/network-vis-chart",
-  "author": "Michael Laenen (miclae76) <m.laenen@contactoffice.net>",
+  "author": "QLIK",
   "license": "MIT",
   "scripts": {
-    "start": "nebula serve  --build false  --type qlik-network-chart",
-    "watch": "nebula serve --type qlik-network-chart",
-    "build": "nebula build ",
-    "eslint": "eslint src"
+    "start": "nebula serve --build false --type qlik-network-chart",
+    "watch": "nebula serve --type sn-network-chart",
+    "watch:legacy": "nebula serve --type qlik-network-chart",
+    "build": "nebula build",
+    "sense": "nebula sense --meta resources/meta.json",
+    "eslint": "eslint src",
+    "spec": "scriptappy-from-jsdoc -c ./spec-configs/props.conf.js"
   },
-  "main": "dist/qlik-network-chart.js",
+  "files": [
+    "api-specifications",
+    "dist",
+    "core",
+    "sn-network-chart-ext"
+  ],
+  "main": "dist/sn-network-chart.js",
   "devDependencies": {
     "@nebula.js/cli": "1.7.0",
     "@nebula.js/cli-build": "1.7.0",
@@ -20,13 +29,12 @@
     "@nebula.js/cli-serve": "1.7.0",
     "@nebula.js/stardust": "1.7.0",
     "babel-eslint": "10.1.0",
-    "eslint": "7.32.0"
+    "scriptappy-from-jsdoc": "^0.7.0",
+    "eslint": "7.32.0",
+    "vis-network": "9.1.0",
+    "vis-data": "^7.0.0"
   },
   "peerDependencies": {
     "@nebula.js/stardust": ">=1.0.0"
-  },
-  "dependencies": {
-    "vis-network": "9.1.0",
-    "vis-data": "^7.0.0"
   }
 }

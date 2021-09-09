@@ -31,7 +31,7 @@ jobs:
             --detect.project.name="viz-bundle-qlik-network-chart"
       - run:
           name: Build
-          command: yarn build
+          command: yarn build && yarn sense
           environment:
             NODE_ENV: production
       - store_artifacts:

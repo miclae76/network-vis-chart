@@ -1,0 +1,136 @@
+{
+  "scriptappy": "1.0.0",
+  "info": {
+    "name": "sn-network-chart:properties",
+    "description": "Network chart generic object definition",
+    "version": "0.0.1",
+    "license": "MIT",
+    "stability": "experimental",
+    "x-qlik-visibility": "public"
+  },
+  "entries": {},
+  "definitions": {
+    "module.exports.displayEdgeLabel": {
+      "optional": true,
+      "defaultValue": false,
+      "type": "boolean"
+    },
+    "module.exports.edgeType": {
+      "optional": true,
+      "defaultValue": "dynamic",
+      "kind": "union",
+      "items": [
+        {
+          "kind": "literal",
+          "value": "'dynamic'"
+        },
+        {
+          "kind": "literal",
+          "value": "'continuous'"
+        },
+        {
+          "kind": "literal",
+          "value": "'discrete'"
+        },
+        {
+          "kind": "literal",
+          "value": "'diagonalCross'"
+        },
+        {
+          "kind": "literal",
+          "value": "'straightCross'"
+        },
+        {
+          "kind": "literal",
+          "value": "'horizontal'"
+        },
+        {
+          "kind": "literal",
+          "value": "'vertical'"
+        },
+        {
+          "kind": "literal",
+          "value": "'curvedCW'"
+        },
+        {
+          "kind": "literal",
+          "value": "'curvedCCW'"
+        },
+        {
+          "kind": "literal",
+          "value": "'cubicBezier'"
+        }
+      ],
+      "type": "string"
+    },
+    "module.exports.nodeShape": {
+      "optional": true,
+      "defaultValue": "dot",
+      "kind": "union",
+      "items": [
+        {
+          "kind": "literal",
+          "value": "'dot'"
+        },
+        {
+          "kind": "literal",
+          "value": "'square'"
+        },
+        {
+          "kind": "literal",
+          "value": "'star'"
+        },
+        {
+          "kind": "literal",
+          "value": "'triangle'"
+        },
+        {
+          "kind": "literal",
+          "value": "'triangleDown'"
+        },
+        {
+          "kind": "literal",
+          "value": "'diamond'"
+        }
+      ],
+      "type": "string"
+    },
+    "module.exports.posEdgeLabel": {
+      "optional": true,
+      "defaultValue": "top",
+      "kind": "union",
+      "items": [
+        {
+          "kind": "literal",
+          "value": "'top'"
+        },
+        {
+          "kind": "literal",
+          "value": "'middle'"
+        },
+        {
+          "kind": "literal",
+          "value": "'bottom'"
+        },
+        {
+          "kind": "literal",
+          "value": "'horizontal'"
+        }
+      ],
+      "type": "string"
+    },
+    "module.exports.qHyperCubeDef": {
+      "kind": "object",
+      "entries": {}
+    },
+    "module.exports.shadowMode": {
+      "optional": true,
+      "defaultValue": false,
+      "type": "boolean"
+    },
+    "module.exports.version": {
+      "description": "Current version of this generic object definition",
+      "type": "string"
+    }
+  }
+}
