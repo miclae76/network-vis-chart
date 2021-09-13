@@ -11,9 +11,10 @@
     "watch": "nebula serve --type sn-network-chart",
     "watch:legacy": "nebula serve --type qlik-network-chart",
     "build": "nebula build --core core",
-    "sense": "nebula sense --meta resources/meta.json && shx cp resources/network_chart_v1.png dist",
+    "sense": "nebula sense --meta resources/meta.json && shx cp resources/network_chart_v1.png sn-network-chart-ext",
     "eslint": "eslint src",
-    "spec": "scriptappy-from-jsdoc -c ./spec-configs/props.conf.js"
+    "spec": "scriptappy-from-jsdoc -c ./spec-configs/props.conf.js",
+    "prepublishOnly": "shx rm -rf dist && shx rm -rf core/esm && shx rm -rf sn-network-chart-ext && yarn build && yarn sense"
   },
   "files": [
     "api-specifications",
