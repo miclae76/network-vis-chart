@@ -10,8 +10,8 @@
     "start": "nebula serve --build false --type qlik-network-chart",
     "watch": "nebula serve --type sn-network-chart",
     "watch:legacy": "nebula serve --type qlik-network-chart",
-    "build": "nebula build",
-    "sense": "nebula sense --meta resources/meta.json",
+    "build": "nebula build --core core",
+    "sense": "nebula sense --meta resources/meta.json && shx cp resources/network_chart_v1.png dist",
     "eslint": "eslint src",
     "spec": "scriptappy-from-jsdoc -c ./spec-configs/props.conf.js"
   },
@@ -31,6 +31,7 @@
     "babel-eslint": "10.1.0",
     "scriptappy-from-jsdoc": "^0.7.0",
     "eslint": "7.32.0",
+    "shx": "^0.3.3",
     "vis-network": "9.1.0",
     "vis-data": "^7.0.0"
   },
