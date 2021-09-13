@@ -2,6 +2,13 @@
   pointer-events: none;
 }
 
+.sn-network-top {
+  height: 100%;
+  width: 100%;
+  overflow: 'auto';
+  cursor: default;
+}
+
 .vis-tooltip {
   position: absolute;
   background-color: #333;
