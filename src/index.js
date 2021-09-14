@@ -1,4 +1,4 @@
-import { useElement, usePromise, useEffect, useLayout, useTheme, useRect, useState } from '@nebula.js/stardust';
+import { useElement, usePromise, useEffect, useStaleLayout, useTheme, useRect, useState, useConstraints, useSelections } from '@nebula.js/stardust';
 import data from './extension/data';
 import ext from './extension/ext';
 import properties from './extension/properties';
@@ -11,28 +11,21 @@ export default function supernova() {
       data: data(),
     },
     component() {
-      const layout = useLayout();
+      const layout = useStaleLayout();
       const element = useElement();
       const theme = useTheme();
       const rect = useRect();
+      const constraints = useConstraints();
+      const selections = useSelections();
       const [network, setNetwork] = useState();
 
-      const component = {
-        inEditState: () => false,
-        options: {
-          noInteraction: false,
-          backendApi: {
-            selectValues: ()=>{}
-          }
-        }
-      };
       useEffect(()=> {
         network && network.fit();
       }, [rect.width, rect.height]);
 
       usePromise(()=>
-        paint({ element,layout, theme, component }).then((n)=>setNetwork(n)),
-      [layout, element, theme ]);
+        paint({ element,layout, theme, constraints, selections }).then((n)=>setNetwork(n)),
+      [layout, element, theme.name(), constraints ]);
     },
 
     ext: ext(),

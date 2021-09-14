@@ -16,6 +16,22 @@ export default {
     }]
   },
   /**
+  * @type {boolean=}
+  */
+  showTitles: false,
+  /**
+  * @type {string=}
+  */
+  title: '',
+  /**
+  * @type {string=}
+  */
+  subtitle: '',
+  /**
+  * @type {string=}
+  */
+  footnote: '',
+  /**
    * @type {('dynamic'|'continuous'|'discrete'|'diagonalCross'|'straightCross'|'horizontal'|'vertical'|'curvedCW'|'curvedCCW'|'cubicBezier')=}
    */
   edgeType: "dynamic",

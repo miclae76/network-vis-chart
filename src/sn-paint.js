@@ -11,7 +11,7 @@ function getColor (index, colors) {
   return colors[index % colors.length];
 }
 
-export default function paint ( { element,layout, theme, component } ) {
+export default function paint ( { element,layout, theme, selections, constraints } ) {
   return new Promise((resolve) => {
     const colorScale = theme.getDataColorPalettes()[0];
     const numDimensions = layout.qHyperCube.qDimensionInfo.length;
@@ -26,7 +26,7 @@ export default function paint ( { element,layout, theme, component } ) {
       const topDiv = document.createElement("div");
       topDiv.setAttribute('id', containerId);
       topDiv.classList.add('sn-network-top');
-      component.inEditState() && topDiv.classList.add('is-edit-mode');
+      constraints.passive && topDiv.classList.add('is-edit-mode');
       element.append(topDiv);
 
       var dataSet = qData.qMatrix.map(function(e){
@@ -171,7 +171,7 @@ export default function paint ( { element,layout, theme, component } ) {
       var network = new Network(container, data, options);
       network.fit();
       network.on('select', function (properties) {
-        if (Object.prototype.hasOwnProperty.call(properties, "nodes") && component.options.noInteraction !== true) {
+        if (Object.prototype.hasOwnProperty.call(properties, "nodes") && !constraints.active && !constraints.select) {
           if (properties.nodes.length > 0) {
             // find connected nodes to selection
             var connectedNodes = network.getConnectedNodes(properties.nodes[0]);
@@ -191,8 +191,16 @@ export default function paint ( { element,layout, theme, component } ) {
                 toSelect.indexOf(id) === -1 && toSelect.push(id);
               }
             });
+
+            if (!selections.isActive()) {
+              selections.begin('/qHyperCubeDef');
+            }
+
             //Make the selections
-            component.backendApi.selectValues(0,toSelect,false);
+            selections.select({
+              method: 'selectHyperCubeValues',
+              params: ['/qHyperCubeDef', 0, toSelect, false],
+            });
           }
         }
       });

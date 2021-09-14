@@ -45,79 +45,86 @@ export default function ext() {
         },
         settings: {
           type: "items",
-          label: "Settings",
+          uses: 'settings',
           items: {
-            edgeType: {
-              ref: "edgeType",
-              type: "string",
-              component: "dropdown",
-              label: "Edge Type",
-              options: [
-                { value: 'dynamic' },
-                { value: 'continuous' },
-                { value: 'discrete' },
-                { value: 'diagonalCross' },
-                { value: 'straightCross' },
-                { value: 'horizontal' },
-                { value: 'vertical' },
-                { value: 'curvedCW' },
-                { value: 'curvedCCW' },
-                { value: 'cubicBezier' }
-              ],
-              defaultValue: "dynamic"
-            },
-            displayEdgeLabel : {
-              ref: "displayEdgeLabel",
-              type: "boolean",
-              component: "switch",
-              label: "Display Edge Value",
-              options: [{
-                value: true,
-                label: "On"
-              }, {
-                value: false,
-                label: "Off"
-              }],
-              defaultValue: false
-            },
-            posEdgeLabel: {
-              ref: "posEdgeLabel",
-              type: "string",
-              component: "dropdown",
-              label: "Position Edge Label",
-              options: [
-                { value: 'top' }, { value: 'middle' }, { value: 'bottom' }, { value: 'horizontal' }
-              ],
-              defaultValue: "top"
-            },
-            nodeShape: {
-              ref: "nodeShape",
-              type: "string",
-              component: "dropdown",
-              label: "Node Shape",
-              options: [
-                { value: 'dot' },
-                { value: 'square' },
-                { value: 'star' },
-                { value: 'triangle' },
-                { value: 'triangleDown' },
-                { value: 'diamond' }
-              ],
-              defaultValue: "dot"
-            },
-            shadowMode: {
-              ref: "shadowMode",
-              type: "boolean",
-              component: "switch",
-              label: "Display Shadow",
-              options: [{
-                value: true,
-                label: "On"
-              }, {
-                value: false,
-                label: "Off"
-              }],
-              defaultValue: false
+            presentation: {
+              type: 'items',
+              grouped: false,
+              translation: 'properties.presentation',
+              items: {
+                edgeType: {
+                  ref: "edgeType",
+                  type: "string",
+                  component: "dropdown",
+                  label: "Edge Type",
+                  options: [
+                    { value: 'dynamic' },
+                    { value: 'continuous' },
+                    { value: 'discrete' },
+                    { value: 'diagonalCross' },
+                    { value: 'straightCross' },
+                    { value: 'horizontal' },
+                    { value: 'vertical' },
+                    { value: 'curvedCW' },
+                    { value: 'curvedCCW' },
+                    { value: 'cubicBezier' }
+                  ],
+                  defaultValue: "dynamic"
+                },
+                displayEdgeLabel : {
+                  ref: "displayEdgeLabel",
+                  type: "boolean",
+                  component: "switch",
+                  label: "Display Edge Value",
+                  options: [{
+                    value: true,
+                    label: "On"
+                  }, {
+                    value: false,
+                    label: "Off"
+                  }],
+                  defaultValue: false
+                },
+                posEdgeLabel: {
+                  ref: "posEdgeLabel",
+                  type: "string",
+                  component: "dropdown",
+                  label: "Position Edge Label",
+                  options: [
+                    { value: 'top' }, { value: 'middle' }, { value: 'bottom' }, { value: 'horizontal' }
+                  ],
+                  defaultValue: "top"
+                },
+                nodeShape: {
+                  ref: "nodeShape",
+                  type: "string",
+                  component: "dropdown",
+                  label: "Node Shape",
+                  options: [
+                    { value: 'dot' },
+                    { value: 'square' },
+                    { value: 'star' },
+                    { value: 'triangle' },
+                    { value: 'triangleDown' },
+                    { value: 'diamond' }
+                  ],
+                  defaultValue: "dot"
+                },
+                shadowMode: {
+                  ref: "shadowMode",
+                  type: "boolean",
+                  component: "switch",
+                  label: "Display Shadow",
+                  options: [{
+                    value: true,
+                    label: "On"
+                  }, {
+                    value: false,
+                    label: "Off"
+                  }],
+                  defaultValue: false
+                }
+              }
             }
           }
         },
