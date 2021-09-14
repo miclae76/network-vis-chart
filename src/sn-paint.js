@@ -153,7 +153,7 @@ export default function paint ( { element,layout, theme, selections, constraints
         },
         interaction: {
           hideEdgesOnDrag: true,
-          selectable: true,
+          selectable: !constraints.active && !constraints.select,
           tooltipDelay: 100,
           multiselect: true,
           selectConnectedEdges: true
