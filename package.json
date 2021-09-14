@@ -1,5 +1,5 @@
 {
-  "name": "sn-network-chart",
+  "name": "@nebula.js/sn-network-chart",
   "version": "0.0.1",
   "description": "Displays hierarchical or relational dimensions as nodes and edges´, with measures to show the significance of its links.",
   "homepage": "",
