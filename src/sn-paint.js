@@ -179,7 +179,6 @@ export default function paint ( { element,layout, theme, selections, constraints
           if (nodes.length > 0) {
             // find connected nodes to selection
             var conNodes = nodes.map(n => network.getConnectedNodes(n));
-            console.log(conNodes);
             // append nodes to the array
             conNodes.push(nodes);
             var connectedNodes = conNodes.flat();
