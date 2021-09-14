@@ -153,7 +153,10 @@ export default function paint ( { element,layout, theme, selections, constraints
         },
         interaction: {
           hideEdgesOnDrag: true,
-          tooltipDelay: 100
+          selectable: true,
+          tooltipDelay: 100,
+          multiselect: true,
+          selectConnectedEdges: true
         },
         physics: {
           forceAtlas2Based: {
@@ -172,11 +175,14 @@ export default function paint ( { element,layout, theme, selections, constraints
       network.fit();
       network.on('select', function (properties) {
         if (Object.prototype.hasOwnProperty.call(properties, "nodes") && !constraints.active && !constraints.select) {
-          if (properties.nodes.length > 0) {
+          const nodes = network.getSelectedNodes();
+          if (nodes.length > 0) {
             // find connected nodes to selection
-            var connectedNodes = network.getConnectedNodes(properties.nodes[0]);
-            // append node to the array
-            connectedNodes.push(properties.nodes[0]);
+            var conNodes = nodes.map(n => network.getConnectedNodes(n));
+            console.log(conNodes);
+            // append nodes to the array
+            conNodes.push(nodes);
+            var connectedNodes = conNodes.flat();
             const toSelect = [];
             connectedNodes.forEach(function(node) {
               var id;
@@ -192,6 +198,8 @@ export default function paint ( { element,layout, theme, selections, constraints
               }
             });
 
+            //network.selectNodes(connectedNodes);
+
             if (!selections.isActive()) {
               selections.begin('/qHyperCubeDef');
             }
@@ -206,6 +214,7 @@ export default function paint ( { element,layout, theme, selections, constraints
       });
 
       network.on('stabilizationIterationsDone', function() {
+        network.stopSimulation();
         resolve(network);
       });
     } else {
