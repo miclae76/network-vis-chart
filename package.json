@@ -1,38 +1,42 @@
 {
-  "name": "qlik-network-chart",
-  "version": "0.0.1",
+  "name": "@nebula.js/sn-network-chart",
+  "version": "0.1.0",
   "description": "Displays hierarchical or relational dimensions as nodes and edges´, with measures to show the significance of its links.",
   "homepage": "",
   "repository": "https://github.com/qlik-oss/network-vis-chart",
-  "author": "Michael Laenen (miclae76) <m.laenen@contactoffice.net>",
+  "author": "QLIK",
   "license": "MIT",
   "scripts": {
-    "build": "gulp build",
-    "build:zip": "gulp zip",
-    "eslint": "eslint src"
+    "start": "nebula serve --build false --type qlik-network-chart",
+    "watch": "nebula serve --type sn-network-chart",
+    "watch:legacy": "nebula serve --type qlik-network-chart",
+    "build": "nebula build --core core",
+    "sense": "nebula sense --meta resources/meta.json && shx cp resources/network_chart_v1.png sn-network-chart-ext",
+    "eslint": "eslint src",
+    "spec": "scriptappy-from-jsdoc -c ./spec-configs/props.conf.js",
+    "prepublishOnly": "shx rm -rf dist && shx rm -rf core/esm && shx rm -rf sn-network-chart-ext && yarn build && yarn sense"
   },
+  "files": [
+    "api-specifications",
+    "dist",
+    "core",
+    "sn-network-chart-ext"
+  ],
+  "main": "dist/sn-network-chart.js",
   "devDependencies": {
-    "@babel/core": "7.15.0",
-    "@babel/polyfill": "7.12.1",
-    "@babel/preset-env": "7.15.0",
+    "@nebula.js/cli": "1.7.0",
+    "@nebula.js/cli-build": "1.7.0",
+    "@nebula.js/cli-sense": "1.7.0",
+    "@nebula.js/cli-serve": "1.7.0",
+    "@nebula.js/stardust": "1.7.0",
     "babel-eslint": "10.1.0",
-    "babel-loader": "8.2.2",
-    "css-loader": "6.2.0",
-    "del": "6.0.0",
+    "scriptappy-from-jsdoc": "^0.7.0",
     "eslint": "7.32.0",
-    "eslint-loader": "4.0.2",
-    "file-loader": "6.2.0",
-    "gulp": "4.0.2",
-    "gulp-util": "^3.0.7",
-    "gulp-zip": "5.1.0",
-    "less": "4.1.1",
-    "less-loader": "10.0.1",
-    "style-loader": "3.2.1",
-    "stylelint": "13.13.1",
-    "stylelint-webpack-plugin": "3.0.1",
-    "webpack": "5.51.1"
+    "shx": "^0.3.3",
+    "vis-network": "9.1.0",
+    "vis-data": "^7.0.0"
   },
-  "dependencies": {
-    "vis": "4.21.0"
+  "peerDependencies": {
+    "@nebula.js/stardust": ">=1.0.0"
   }
 }

@@ -1,3 +1,5 @@
 node_modules/
 dist/
 BUMPED_VERSION
+sn-network-chart-ext/
+core/esm

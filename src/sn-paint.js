@@ -1,7 +1,7 @@
-import { Network } from 'vis/index-network';
-import qlik from 'qlik';
+import { Network } from 'vis-network';
 import { createTooltipHTML } from './tooltip';
 import { escapeHTML } from './utilities';
+import './styles/main.css';
 
 function isTextCellNotEmpty(c) {
   return (c.qText && !(c.qIsNull || c.qText.trim() == ''));
@@ -11,9 +11,9 @@ function getColor (index, colors) {
   return colors[index % colors.length];
 }
 
-function paint ( $element, layout, qTheme, component ) {
-  return new qlik.Promise(function(resolve) {
-    const colorScale = qTheme.properties.palettes.data[0];
+export default function paint ( { element,layout, theme, selections, constraints } ) {
+  return new Promise((resolve) => {
+    const colorScale = theme.getDataColorPalettes()[0];
     const numDimensions = layout.qHyperCube.qDimensionInfo.length;
     const numMeasures = layout.qHyperCube.qMeasureInfo.length;
 
@@ -22,14 +22,12 @@ function paint ( $element, layout, qTheme, component ) {
       containerId = 'network-container_' + id;
 
     if(qData && qData.qMatrix) {
-      $element.empty().append($('<div />')
-        .attr({ id: containerId })
-        .toggleClass('is-edit-mode', component.inEditState())
-        .css({
-          height: $element.height(),
-          width: $element.width(),
-          overflow: 'auto'
-        }));
+      element.textContent = '';
+      const topDiv = document.createElement("div");
+      topDiv.setAttribute('id', containerId);
+      topDiv.classList.add('sn-network-top');
+      constraints.passive && topDiv.classList.add('is-edit-mode');
+      element.append(topDiv);
 
       var dataSet = qData.qMatrix.map(function(e){
         const nodeName = e[1].qText;
@@ -68,7 +66,7 @@ function paint ( $element, layout, qTheme, component ) {
         if (numMeasures > 1) {
           if (e[numDimensions+1].qNum) {
             // node value - to scale node shape size
-            dataItem.nodeValue = e[5].qNum;
+            dataItem.nodeValue = e[numDimensions+1].qNum;
           }
         }
 
@@ -120,7 +118,7 @@ function paint ( $element, layout, qTheme, component ) {
           groups[nodeItem.group] = {};
         }
       }
-      const colors = colorScale.scale[Math.min(Object.keys(groups).length-1, colorScale.scale.length-1)];
+      const colors = colorScale.colors[Math.min(Object.keys(groups).length-1, colorScale.colors.length-1)];
 
       Object.keys(groups).forEach(function(g,i) {
         groups[g].color = getColor(i, colors);
@@ -138,7 +136,7 @@ function paint ( $element, layout, qTheme, component ) {
       var options = {
         groups: groups,
         layout: {
-          randomSeed: 1
+          randomSeed: 34545 //"0.6610209392878246:1631081903504"
         },
         nodes: {
           shape:layout.nodeShape,
@@ -155,7 +153,10 @@ function paint ( $element, layout, qTheme, component ) {
         },
         interaction: {
           hideEdgesOnDrag: true,
-          tooltipDelay: 100
+          selectable: !constraints.active && !constraints.select,
+          tooltipDelay: 100,
+          multiselect: true,
+          selectConnectedEdges: true
         },
         physics: {
           forceAtlas2Based: {
@@ -172,17 +173,15 @@ function paint ( $element, layout, qTheme, component ) {
       };
       var network = new Network(container, data, options);
       network.fit();
-
-      // Handle Selection on 1-node
-      $("#"+containerId).css('cursor','default');
-
       network.on('select', function (properties) {
-        if (Object.prototype.hasOwnProperty.call(properties, "nodes") && component.options.noInteraction !== true) { 
-          if (properties.nodes.length > 0) {
+        if (Object.prototype.hasOwnProperty.call(properties, "nodes") && !constraints.active && !constraints.select) {
+          const nodes = network.getSelectedNodes();
+          if (nodes.length > 0) {
             // find connected nodes to selection
-            var connectedNodes = network.getConnectedNodes(properties.nodes[0]);
-            // append node to the array
-            connectedNodes.push(properties.nodes[0]);
+            var conNodes = nodes.map(n => network.getConnectedNodes(n));
+            // append nodes to the array
+            conNodes.push(nodes);
+            var connectedNodes = conNodes.flat();
             const toSelect = [];
             connectedNodes.forEach(function(node) {
               var id;
@@ -197,32 +196,28 @@ function paint ( $element, layout, qTheme, component ) {
                 toSelect.indexOf(id) === -1 && toSelect.push(id);
               }
             });
+
+            //network.selectNodes(connectedNodes);
+
+            if (!selections.isActive()) {
+              selections.begin('/qHyperCubeDef');
+            }
+
             //Make the selections
-            component.backendApi.selectValues(0,toSelect,false);
+            selections.select({
+              method: 'selectHyperCubeValues',
+              params: ['/qHyperCubeDef', 0, toSelect, false],
+            });
           }
         }
       });
 
       network.on('stabilizationIterationsDone', function() {
-        resolve();
+        network.stopSimulation();
+        resolve(network);
       });
     } else {
       resolve();
     }
   });
 }
-
-function themePaint ($element, layout) {
-  const component = this;
-  try {
-    const app = qlik.currApp(this);
-
-    return app.theme.getApplied().then( function( qTheme ) {
-      return paint($element, layout, qTheme, component);
-    });
-  } catch (exception) {
-    console.error(exception); // eslint-disable-line no-console
-  }
-}
-
-export default themePaint;
