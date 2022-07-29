@@ -12,7 +12,7 @@ defaults: &defaults
 jobs:
   build:
     docker:
-    - image: circleci/node:stretch-browsers
+      - image: circleci/node:stretch-browsers
     steps:
       - checkout
       - run:
@@ -34,6 +34,12 @@ jobs:
           command: yarn build && yarn sense
           environment:
             NODE_ENV: production
+      - run:
+          name: Update spec
+          command: yarn run spec
+      - run:
+          name: Run unit tests
+          command: yarn test:unit
       - store_artifacts:
           path: dist
           destination: dist

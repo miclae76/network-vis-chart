@@ -3,3 +3,5 @@ dist/
 BUMPED_VERSION
 sn-network-chart-ext/
 core/esm
+coverage
+yarn-error.log
