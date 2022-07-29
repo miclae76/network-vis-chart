@@ -14,7 +14,8 @@
     "sense": "nebula sense --meta resources/meta.json && shx cp resources/network_chart_v1.png sn-network-chart-ext",
     "eslint": "eslint src",
     "spec": "scriptappy-from-jsdoc -c ./spec-configs/props.conf.js",
-    "prepublishOnly": "shx rm -rf dist && shx rm -rf core/esm && shx rm -rf sn-network-chart-ext && yarn build && yarn sense"
+    "prepublishOnly": "shx rm -rf dist && shx rm -rf core/esm && shx rm -rf sn-network-chart-ext && yarn build && yarn sense",
+    "jest:test": "jest"
   },
   "files": [
     "api-specifications",
@@ -29,12 +30,16 @@
     "@nebula.js/cli-sense": "1.7.0",
     "@nebula.js/cli-serve": "1.7.0",
     "@nebula.js/stardust": "1.7.0",
+    "@testing-library/jest-dom": "5.16.4",
     "babel-eslint": "10.1.0",
-    "scriptappy-from-jsdoc": "^0.7.0",
+    "babel-jest": "28.1.3",
     "eslint": "7.32.0",
-    "shx": "^0.3.3",
-    "vis-network": "9.1.0",
-    "vis-data": "^7.0.0"
+    "jest": "28.1.3",
+    "jest-environment-jsdom": "28.1.3",
+    "scriptappy-from-jsdoc": "0.7.0",
+    "shx": "0.3.3",
+    "vis-data": "7.0.0",
+    "vis-network": "9.1.0"
   },
   "peerDependencies": {
     "@nebula.js/stardust": ">=1.0.0"

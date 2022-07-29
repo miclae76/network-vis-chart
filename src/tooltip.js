@@ -24,5 +24,5 @@ export function createTooltipHTML({ name, groupNumber, nodeMeasure }) {
   tooltip.appendChild(groupNumberEntry);
   tooltip.appendChild(nodeMeasureEntry);
 
-  return tooltip.innerHTML;
+  return tooltip;
 }
