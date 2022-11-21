@@ -22,14 +22,6 @@ jobs:
           name: Lint
           command: yarn eslint
       - run:
-          name: BlackDuck scan
-          command: curl -s https://detect.synopsys.com/detect.sh | bash -s -- \
-            --blackduck.url="https://qliktech.blackducksoftware.com" \
-            --blackduck.trust.cert=true \
-            --blackduck.username="svc-blackduck" \
-            --blackduck.password=${svc_blackduck} \
-            --detect.project.name="viz-bundle-qlik-network-chart"
-      - run:
           name: Build
           command: yarn build && yarn sense
           environment:
