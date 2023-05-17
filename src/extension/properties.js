@@ -5,32 +5,35 @@ export default {
    */
   version: process.env.PACKAGE_VERSION,
   /**
-   * @typedef
+   * Extends `HyperCubeDef`, see Engine API: `HyperCubeDef`.
+   * @extends {HyperCubeDef}
    */
   qHyperCubeDef: {
     qDimensions: [],
     qMeasures: [],
-    qInitialDataFetch: [{
-      qWidth: 7,
-      qHeight: 1400
-    }]
+    qInitialDataFetch: [
+      {
+        qWidth: 7,
+        qHeight: 1400,
+      },
+    ],
   },
   /**
-  * @type {boolean=}
-  */
+   * @type {boolean=}
+   */
   showTitles: false,
   /**
-  * @type {string=}
-  */
-  title: '',
+   * @type {string=}
+   */
+  title: "",
   /**
-  * @type {string=}
-  */
-  subtitle: '',
+   * @type {string=}
+   */
+  subtitle: "",
   /**
-  * @type {string=}
-  */
-  footnote: '',
+   * @type {string=}
+   */
+  footnote: "",
   /**
    * @type {('dynamic'|'continuous'|'discrete'|'diagonalCross'|'straightCross'|'horizontal'|'vertical'|'curvedCW'|'curvedCCW'|'cubicBezier')=}
    */
