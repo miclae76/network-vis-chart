@@ -1,19 +1,47 @@
 {
-  "scriptappy": "1.0.0",
+  "scriptappy": "1.1.0",
   "info": {
-    "name": "sn-network-chart:properties",
+    "name": "@nebula.js/sn-network-chart:properties",
     "description": "Network chart generic object definition",
-    "version": "0.0.1",
+    "version": "0.3.0",
     "license": "MIT",
     "stability": "experimental",
     "x-qlik-visibility": "public"
   },
   "entries": {},
   "definitions": {
-    "module.exports.displayEdgeLabel": {
+    "module.exports.version": {
+      "description": "Current version of this generic object definition",
+      "type": "string"
+    },
+    "module.exports.qHyperCubeDef": {
+      "description": "Extends `HyperCubeDef`, see Engine API: `HyperCubeDef`.",
+      "extends": [
+        {
+          "type": "HyperCubeDef"
+        }
+      ],
+      "kind": "object"
+    },
+    "module.exports.showTitles": {
       "optional": true,
       "defaultValue": false,
       "type": "boolean"
+    },
+    "module.exports.title": {
+      "optional": true,
+      "defaultValue": "",
+      "type": "string"
+    },
+    "module.exports.subtitle": {
+      "optional": true,
+      "defaultValue": "",
+      "type": "string"
+    },
+    "module.exports.footnote": {
+      "optional": true,
+      "defaultValue": "",
+      "type": "string"
     },
     "module.exports.edgeType": {
       "optional": true,
@@ -60,8 +88,35 @@
           "kind": "literal",
           "value": "'cubicBezier'"
         }
-      ],
-      "type": "string"
+      ]
+    },
+    "module.exports.displayEdgeLabel": {
+      "optional": true,
+      "defaultValue": false,
+      "type": "boolean"
+    },
+    "module.exports.posEdgeLabel": {
+      "optional": true,
+      "defaultValue": "top",
+      "kind": "union",
+      "items": [
+        {
+          "kind": "literal",
+          "value": "'top'"
+        },
+        {
+          "kind": "literal",
+          "value": "'middle'"
+        },
+        {
+          "kind": "literal",
+          "value": "'bottom'"
+        },
+        {
+          "kind": "literal",
+          "value": "'horizontal'"
+        }
+      ]
     },
     "module.exports.nodeShape": {
       "optional": true,
@@ -92,45 +147,12 @@
           "kind": "literal",
           "value": "'diamond'"
         }
-      ],
-      "type": "string"
-    },
-    "module.exports.posEdgeLabel": {
-      "optional": true,
-      "defaultValue": "top",
-      "kind": "union",
-      "items": [
-        {
-          "kind": "literal",
-          "value": "'top'"
-        },
-        {
-          "kind": "literal",
-          "value": "'middle'"
-        },
-        {
-          "kind": "literal",
-          "value": "'bottom'"
-        },
-        {
-          "kind": "literal",
-          "value": "'horizontal'"
-        }
-      ],
-      "type": "string"
-    },
-    "module.exports.qHyperCubeDef": {
-      "kind": "object",
-      "entries": {}
+      ]
     },
     "module.exports.shadowMode": {
       "optional": true,
       "defaultValue": false,
       "type": "boolean"
-    },
-    "module.exports.version": {
-      "description": "Current version of this generic object definition",
-      "type": "string"
     }
   }
 }
